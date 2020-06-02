@@ -36,7 +36,7 @@ import com.home.hibernate.entity.Vehicle;
 /**
  * @author amit
  */
-
+@Ignore
 public class TestAmit	
 {
    private static SessionFactory sessionFactory = null;

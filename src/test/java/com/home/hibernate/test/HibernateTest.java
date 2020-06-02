@@ -18,6 +18,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.home.hibernate.entity.Address;
@@ -35,6 +36,7 @@ import com.home.hibernate.entity.Vehicle;
 /**
  * @author amit
  */
+@Ignore
 public class HibernateTest
 {
    private static SessionFactory sessionFactory = null;
