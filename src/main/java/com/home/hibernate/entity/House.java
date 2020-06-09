@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * @author amit
  */
@@ -14,19 +16,23 @@ import javax.persistence.ManyToOne;
 public class House
 {
    @Id
-   @GeneratedValue( strategy = GenerationType.AUTO )
-   private int    id;
+  // @GeneratedValue( strategy = GenerationType.AUTO )
+   @GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@GeneratedValue(generator = "uuid2")
+   private String    id;
+   
+   
    private String name;
    @ManyToOne
    @JoinColumn( name = "OWNER_ID" )
    private Owner  owner; // mappedBy
 
-   public int getId()
+   public String getId()
    {
       return id;
    }
 
-   public void setId( int id )
+   public void setId( String id )
    {
       this.id = id;
    }

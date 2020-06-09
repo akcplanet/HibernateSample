@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * @author amit
  */
@@ -18,8 +20,10 @@ public class Phone
 {
    @Id
    @Column( name = "PHONE_ID" )
-   @GeneratedValue( strategy = GenerationType.AUTO )
-   private int id;
+  // @GeneratedValue( strategy = GenerationType.AUTO )
+   @GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@GeneratedValue(generator = "uuid2")
+   private String id;
 
    public Phone()
    {
@@ -32,12 +36,12 @@ public class Phone
    }
    private String name;
 
-   public int getId()
+   public String getId()
    {
       return id;
    }
 
-   public void setId( int id )
+   public void setId( String id )
    {
       this.id = id;
    }

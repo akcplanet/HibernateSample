@@ -17,6 +17,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
 /**
@@ -25,9 +26,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 @Entity
 public class Car {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	//@GeneratedValue(strategy = GenerationType.AUTO)
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@GeneratedValue(generator = "uuid2")
+	private String id;
+	
+	
 	private String name;
+	
+	
 	@ManyToMany
 	@JoinTable(name = "CAR_CAROWNER", joinColumns = @JoinColumn(name = "CAR_OWNER_ID"), inverseJoinColumns = @JoinColumn(name = "CAR_ID"))
 	private Collection<CarOwner> owners = new ArrayList<>(); // mappedBy="owners"
@@ -40,11 +47,11 @@ public class Car {
 		this.name = name;
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

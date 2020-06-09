@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,10 +21,9 @@ import javax.persistence.SequenceGenerator;;
  */
 @Entity
 @Table(name = "VEHICLE")
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // testSingleTableStrategy test case
-@DiscriminatorColumn(name = "VEHICLE_TYPE", discriminatorType = DiscriminatorType.STRING) // testSingleTableStrategy
-																							// test case
-// @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS) //testTablePerClassStrategy test case
+@DiscriminatorColumn(name = "VEHICLE_TYPE", discriminatorType = DiscriminatorType.STRING) // only for single testSingleTableStrategy
+// @Inheritance(strategy = InheritanceType.SINGLE_TABLE) // testSingleTableStrategy test case																							// test case
+ @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS) //testTablePerClassStrategy test case
 // @Inheritance(strategy=InheritanceType.JOINED) //testTableJoinedStrategy test case
 public class Vehicle implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
@@ -32,19 +32,21 @@ public class Vehicle implements java.io.Serializable {
 	// @GeneratedValue( strategy = GenerationType.AUTO )
 	// @SequenceGenerator(initialValue = 9999, name = "idgen", sequenceName =
 	// "parentseq", allocationSize = 1)
-	@GenericGenerator(name = "uuid", strategy = "uuid")
-	@GeneratedValue(generator = "uuid")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@GeneratedValue(generator = "uuid2")
 	@Column(name = "VEHICLE_ID")
 	private String id;
 
-	@Id
+	
+	@Version protected Integer version;
+	
 	// @GeneratedValue( strategy = GenerationType.AUTO )
 	// @SequenceGenerator(initialValue = 9999, name = "idgen", sequenceName =
 	// "parentseq", allocationSize = 1)
-	@GenericGenerator(name = "uuid2", strategy = "uuid2")
-	@GeneratedValue(generator = "uuid2")
-	@Column(name = "VEHICLE_ID2")
-	private String id2;
+	//@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	//@GeneratedValue(generator = "uuid2")
+	//@Column(name = "VEHICLE_ID2")
+//	private String id2;
 
 	@Column(name = "VEHICLE_NAME")
 	private String name;
@@ -57,13 +59,7 @@ public class Vehicle implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public String getId2() {
-		return id2;
-	}
 
-	public void setId2(String id2) {
-		this.id2 = id2;
-	}
 
 	public String getId() {
 		return id;
